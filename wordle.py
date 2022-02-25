@@ -1,8 +1,12 @@
 import random
+import os
 from wordle_dict import init_word_list
 from wordle_dict import init_target_list
 
 def main():
+    clearscr = 'CLS' if os.name == 'nt' else 'clear'
+    clear = lambda: os.system(clearscr)
+    clear()
     full_list = init_word_list()
     target_list = init_target_list()
     random.seed()
@@ -12,8 +16,9 @@ def main():
     hanglist = list(hangman)
     notusedlist = []
     usedlist = []
+    guess = ""
     c = 0
-    while c < 6:
+    while c < 6 and guess != "END":
         print(f"Try no {c+1}: Input a valid 5 letter word")
         guess = input().upper()
         err = False
@@ -47,6 +52,10 @@ def main():
             print(f'Hangman pattern : {hangman}')
             c+=1
     print("Target Word =",target)
+    print("Play again y/n?")
+    playagain = input().upper()
+    if (playagain.startswith("Y")):
+        main()
 
 if __name__ == "__main__":
     main()
