@@ -68,7 +68,7 @@ class IP:
         result = subprocess.run(cmd, capture_output=True, text=True)
         if result.returncode == 0:
             print("Endpoint updated successfully.")
-            result = subprocess.run(["wg", "show", "lenovo"], capture_output=True, text=True)
+            result = subprocess.run(["wg", "show", self.WG_INTERFACE], capture_output=True, text=True)
             print(result.stdout)
         else:
             print("Error updating endpoint:")
